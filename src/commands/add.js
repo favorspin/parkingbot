@@ -13,7 +13,6 @@ const msgDefaults = {
 const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
-    let username = payload.user_name
     let slack_id = payload.user_id
     let attachments = []
     let plate = p[1] || ''
