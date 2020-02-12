@@ -22,15 +22,15 @@ const handler = async (payload, res) => {
     } else {
         const plate = p[1].toUpperCase()
 
-        let username = await query.getUsernameByPlate(plate)
+        let slack_id = await query.getUsernameByPlate(plate)
 
-        if (username == '') {
+        if (slack_id == '') {
             attachments = [{
                 text: 'License plate was not found.'
             }]
         } else {
             attachments = [{
-                text: username + ', move your car!'
+                text: '<' + slack_id + '>, move your car!'
             }]
         }
 

@@ -60,14 +60,14 @@ const getUser = async (slackid) => {
 }
 
 const getUsernameByPlate = async (license_plate) => {
-    let q = 'SELECT username \
+    let q = 'SELECT slack_id \
              FROM api.users u \
              JOIN api.cars ca on ca.user_id = u.id \
              WHERE ca.license_plate = $1'
     let result = await db.query(q,[license_plate])
 
     if (result.rows.length !== 0) {
-        return result.rows[0]['username']
+        return result.rows[0]['slack_id']
     } else {
         return ''
     }
