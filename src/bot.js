@@ -18,8 +18,8 @@ bot.message((msg) => {
         token: config('SLACK_TOKEN'),
         icon_emoji: config('ICON_EMOJI'),
         channel: msg.channel,
-        username: 'Starbot',
-        text: `🤖 beep boop: I read you loud and clear!"`
+        username: 'ParkingBot',
+        text: `🤖 beep boop: I read you loud and clear!`
     }, (err, data) => {
         if (err) throw err;
 

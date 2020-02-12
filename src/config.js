@@ -8,6 +8,7 @@ if (ENV === 'development') dotenv.config();
 const config = {
   ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
+  DATABASE_URL: process.env.DATABASE_URL,
   PROXY_URI: process.env.PROXY_URI,
   WEBHOOK_URL: process.env.WEBHOOK_URL,
   PARKINGBOT_COMMAND_TOKEN: process.env.PARKINGBOT_COMMAND_TOKEN,

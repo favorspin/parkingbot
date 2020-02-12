@@ -10,6 +10,8 @@ const _ = require('lodash');
 const config = require('./config');
 const commands = require('./commands');
 const helpCommand = require('./commands/help');
+const db = require('./db');
+
 // const path = require('path');
 
 /**
@@ -17,6 +19,8 @@ const helpCommand = require('./commands/help');
  */
 
 const app = express();
+db.connect()
+
 
 /**
  *  App Configuration
@@ -33,11 +37,6 @@ app.get('/', (req, res) => {
     res.status(200).send("👋🌎");
 });
 
-app.post('/', (req, res) => {
-    console.log(`POST incoming.`);
-    res.status(200).send(req.body);
-});
-
 app.post('/commands/parkingbot', (req, res) => {
     let payload = req.body;
 
@@ -51,10 +50,8 @@ app.post('/commands/parkingbot', (req, res) => {
 
     let cmd = _.reduce(commands, (a, cmd) => {
 
-        return payload.text.match(cmd.pattern) ? cmd : a;
+        return payload.text.trim().match(cmd.pattern) ? cmd : a;
     }, helpCommand);
-
-    console.log(cmd)
 
     cmd.handler(payload, res);
 });
