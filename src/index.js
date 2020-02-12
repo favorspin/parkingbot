@@ -48,6 +48,7 @@ app.post('/commands/parkingbot', (req, res) => {
         let err = '✋ Huh? An invalid slash token was provided.\n' +
                   'Is your Slack slash token correctly configured?'
         console.log(err)
+        console.log(payload)
         res.status(401).end(err)
         return
     }
