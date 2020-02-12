@@ -29,7 +29,7 @@ const handler = async (payload, res) => {
         }]
     } else {
         if (p.length == 3) {
-            slack_id = p[2].match(/@.*\|/).replace(/(@|\|)/g,'')
+            slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
         }
         let userid = await query.getUser(slack_id)
 
