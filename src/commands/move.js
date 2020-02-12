@@ -12,8 +12,6 @@ const msgDefaults = {
 
 const handler = async (payload, res) => {
 
-    console.log(payload)
-
     let p = payload.text.trim().split(/\s+/)
     let attachments = []
 
@@ -32,7 +30,7 @@ const handler = async (payload, res) => {
             }]
         } else {
             attachments = [{
-                text: '<' + slack_id + '>, move your car!'
+                text: '<@' + slack_id + '>, move your car!'
             }]
         }
 
