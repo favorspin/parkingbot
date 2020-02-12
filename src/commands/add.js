@@ -13,7 +13,8 @@ const msgDefaults = {
 const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
-    let username = payload.username
+    let username = payload.user_name
+    let slack_id = payload.user_id
     let attachments = []
     let plate = p[1] || ''
     plate = plate.toUpperCase()
@@ -31,10 +32,10 @@ const handler = async (payload, res) => {
         if (p.length == 3) {
             username = p[2].replace(/@/,'')
         }
-        let userid = await query.getUser(username)
+        let userid = await query.getUser(slack_id)
 
         if (!userid) {
-            userid = await query.createUser(username)
+            userid = await query.createUser(slack_id)
         }
 
         await query.createCar(userid,plate)

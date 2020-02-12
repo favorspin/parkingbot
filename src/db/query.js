@@ -11,11 +11,11 @@ const createCar = async (user_id, license_plate) => {
     return carid
 }
 
-const createUser = async (username) => {
-    let q = 'INSERT INTO api.users (username) \
+const createUser = async (slackid) => {
+    let q = 'INSERT INTO api.users (slack_id) \
              VAlUES ($1)'
-    await db.query(q,[username])
-    let userid = await getUser(username)
+    await db.query(q,[slackid])
+    let userid = await getUser(slackid)
 
     return userid
 }
@@ -46,11 +46,11 @@ const getCar = async (license_plate) => {
     }
 }
 
-const getUser = async (username) => {
+const getUser = async (slackid) => {
     let q = 'SELECT id \
              FROM api.users \
-             WHERE username = $1'
-    let result = await db.query(q,[username])
+             WHERE slack_id = $1'
+    let result = await db.query(q,[slackid])
 
     if (result.rows.length !== 0) {
         return result.rows[0]['id']
