@@ -12,6 +12,8 @@ const msgDefaults = {
 
 const handler = async (payload, res) => {
 
+    console.log(payload)
+
     let p = payload.text.trim().split(/\s+/)
     let attachments = []
 
