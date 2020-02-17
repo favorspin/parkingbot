@@ -11,7 +11,11 @@ const msgDefaults = {
 
 const handler = (payload, res) => {
     let attachments = [{
-        text: 'help stuff here'
+        title: 'Parkingbot can help you move the car that\'s blocking you in!',
+        color: '#2FA44F',
+        text: '`/parking add <LICENSE>` will register your license plate so that moves can be requested. \
+               \n`/parking move <LICENSE>` requests the owner of the car to move so you can get out.',
+        mrkdwn_in: ['text']
     }]
 
     let msg = _.defaults({

@@ -44,7 +44,7 @@ app.post('/', (req, res) => {
 app.post('/commands/parkingbot', (req, res) => {
     let payload = req.body
 
-    console.log(payload)
+    // console.log(payload)
 
     if (!payload || Object.keys(payload).length == 0 || payload.token !== config('PARKINGBOT_COMMAND_TOKEN')) {
         let err = '✋ Huh? An invalid slash token was provided.\n' +

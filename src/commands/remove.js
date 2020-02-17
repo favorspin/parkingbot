@@ -15,6 +15,7 @@ const handler = async (payload, res) => {
     let p = payload.text.trim().split(/\s+/)
     let attachments = []
     let plate = p[1] || ''
+    let team_id = payload.team_id
     plate = plate.toUpperCase()
     let result = ''
 
@@ -23,7 +24,7 @@ const handler = async (payload, res) => {
             text: 'That\'s not a vaild command. Please use the `/parkingbot remove <license plate>` format!'
         }]
     } else {
-        let removed = await query.removeCar(plate)
+        let removed = await query.removeCar(plate, team_id)
         if (removed) {
             result = ' has been removed!'
         } else {

@@ -14,10 +14,11 @@ const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
     let slack_id = payload.user_id
+    let team_id = payload.team_id
     let attachments = []
     let plate = p[1] || ''
     plate = plate.toUpperCase()
-    let carid = await query.getCar(plate)
+    let carid = await query.getCar(plate, team_id)
 
     if (carid) {
         attachments = [{
@@ -25,19 +26,20 @@ const handler = async (payload, res) => {
         }]
     } else if (p.length < 2 || p.length > 3) {
         attachments = [{
-            text: 'That\'s not a vaild command. Please use the `/parkingbot move <license plate>` format!'
+            text: 'That\'s not a vaild command. Please use the `/parkingbot add <license plate>` format!'
         }]
     } else {
         if (p.length == 3) {
             slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
         }
-        let userid = await query.getUser(slack_id)
+
+        let userid = await query.getUser(slack_id, team_id)
 
         if (!userid) {
-            userid = await query.createUser(slack_id)
+            userid = await query.createUser(slack_id, team_id)
         }
 
-        await query.createCar(userid,plate)
+        await query.createCar(userid, plate, team_id)
 
         attachments = [{
             text: plate + ' added!'
