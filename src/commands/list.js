@@ -21,6 +21,9 @@ const handler = async (payload, res) => {
         response_text = 'That\'s not a vaild command. Please use the `/parking list` format!'
     } else {
         if (p.length == 2) {
+
+            // add error handling for incorrect username format
+
             slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
         }
         let cars = await query.getAllCarsForUser(slack_id, team_id)

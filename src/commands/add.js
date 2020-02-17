@@ -26,6 +26,9 @@ const handler = async (payload, res) => {
         response_text = 'That\'s not a vaild command. Please use the `/parking add <license plate>` format!'
     } else {
         if (p.length == 3) {
+
+            // add error handling for incorrect username format
+
             slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
         }
 
