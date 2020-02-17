@@ -41,16 +41,16 @@ const handler = async (payload, res) => {
 
         await query.createCar(userid, plate, team_id)
 
-        attachments = [{
-            text: plate + ' added!',
-            as_user: true
-        }]
+        text: plate + ' added!'
+        // attachments = [{
+        //     text: plate + ' added!'
+        // }]
 
     }
 
     let msg = _.defaults({
         channel: payload.channel_name,
-        attachments: attachments
+        text: text
     }, msgDefaults);
 
     res.set('content-type', 'application/json')
