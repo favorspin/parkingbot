@@ -41,7 +41,7 @@ const handler = async (payload, res) => {
 
         await query.createCar(userid, plate, team_id)
 
-        text: plate + ' added!'
+        let text = plate + ' added!'
         // attachments = [{
         //     text: plate + ' added!'
         // }]
