@@ -24,16 +24,23 @@ const handler = async (payload, res) => {
 
             // add error handling for incorrect username format
 
-            slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
+            let re = new RegExp("<@.+\|.+>")
+
+            if (re.test(p[1])) {
+                slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
+            } else {
+                response_text = p[1] + ' is not a valid username - using current user, instead. '
+            }
+
         }
         let cars = await query.getAllCarsForUser(slack_id, team_id)
         if (_.isEmpty(cars)) {
-            response_text = 'There are no cars `ed to <@' + slack_id + '>'
+            response_text = response_text + 'There are no cars `ed to <@' + slack_id + '>'
         } else {
             if (cars.length == 1) {
-                response_text = 'There is 1 car attached to <@' + slack_id + '>:'
+                response_text = response_text + 'There is 1 car attached to <@' + slack_id + '>:'
             } else {
-                response_text = 'There are ' + cars.length + ' cars attached to <@' + slack_id + '>:'
+                response_text = response_text + 'There are ' + cars.length + ' cars attached to <@' + slack_id + '>:'
             }
             for (var i = 0; i < cars.length; i++) {
                 response_text = response_text + '\n `' + cars[i].license_plate + '`'
