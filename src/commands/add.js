@@ -27,20 +27,29 @@ const handler = async (payload, res) => {
     } else {
         if (p.length == 3) {
 
-            // add error handling for incorrect username format
+            if (re.test(p[1])) {
+                slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
+            } else {
+                response_text = p[1] + ' is not a valid username. Aborting.'
+                skipadd = true
+            }
 
             slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
         }
 
-        let userid = await query.getUser(slack_id, team_id)
+        if (!skipadd) {
+            let userid = await query.getUser(slack_id, team_id)
 
-        if (!userid) {
-            userid = await query.createUser(slack_id, team_id)
+            if (!userid) {
+                userid = await query.createUser(slack_id, team_id)
+            }
+
+            await query.createCar(userid, plate, team_id)
+
+            response_text = plate + ' added!'
+
         }
 
-        await query.createCar(userid, plate, team_id)
-
-        response_text = plate + ' added!'
 
     }
 
