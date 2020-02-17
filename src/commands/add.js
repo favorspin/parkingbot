@@ -17,6 +17,7 @@ const handler = async (payload, res) => {
     let team_id = payload.team_id
     let response_text = ''
     let plate = p[1] || ''
+    let skipadd = false
     plate = plate.toUpperCase()
     let carid = await query.getCar(plate, team_id)
 
@@ -29,16 +30,15 @@ const handler = async (payload, res) => {
 
             let re = new RegExp("<@.+\|.+>")
 
-            if (re.test(p[1])) {
-                slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
+            if (re.test(p[2])) {
+                slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
             } else {
-                response_text = p[1] + ' is not a valid username. Aborting.'
-                let skipadd = true
+                response_text = p[2] + ' is not a valid username. Aborting.'
+                skipadd = true
             }
-
         }
 
-        if (!skipadd) {
+        if(!skipadd) {
             let userid = await query.getUser(slack_id, team_id)
 
             if (!userid) {
@@ -48,9 +48,7 @@ const handler = async (payload, res) => {
             await query.createCar(userid, plate, team_id)
 
             response_text = plate + ' added!'
-
         }
-
 
     }
 
