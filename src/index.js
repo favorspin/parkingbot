@@ -19,12 +19,12 @@ const db = require('./db')
  */
 
 const app = express()
-db.connect()
-
 
 /**
  *  App Configuration
  */
+
+db.connect()
 
 /**
  * Routes Definitions

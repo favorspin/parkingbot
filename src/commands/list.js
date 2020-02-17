@@ -28,7 +28,11 @@ const handler = async (payload, res) => {
         if (_.isEmpty(cars)) {
             text = 'There are no cars attached to <@' + slack_id + '>'
         } else {
-            text = 'There are ' + cars.length + ' cars attached to <@' + slack_id + '>:'
+            if (cars.length == 1) {
+                text = 'There is 1 car attached to <@' + slack_id + '>:'
+            } else {
+                text = 'There are ' + cars.length + ' cars attached to <@' + slack_id + '>:'
+            }
             for (var i = 0; i < cars.length; i++) {
                 text = text + '\n ' + cars[i].license_plate
             }
