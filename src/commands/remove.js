@@ -13,16 +13,14 @@ const msgDefaults = {
 const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
-    let attachments = []
+    let response_text = ''
     let plate = p[1] || ''
     let team_id = payload.team_id
     plate = plate.toUpperCase()
     let result = ''
 
     if (p.length != 2) {
-        attachments = [{
-            text: 'That\'s not a vaild command. Please use the `/parkingbot remove <license plate>` format!'
-        }]
+        response_text = 'That\'s not a vaild command. Please use the `/parkingbot remove <license plate>` format!'
     } else {
         let removed = await query.removeCar(plate, team_id)
         if (removed) {
@@ -30,14 +28,12 @@ const handler = async (payload, res) => {
         } else {
             result = ' could not be found!'
         }
-        attachments = [{
-            text: plate + result
-        }]
+        response_text = plate + result
     }
 
     let msg = _.defaults({
         channel: payload.channel_name,
-        attachments: attachments
+        text: response_text
     }, msgDefaults)
 
     res.set('content-type', 'application/json')

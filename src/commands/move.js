@@ -14,32 +14,26 @@ const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
     let team_id = payload.team_id
-    let attachments = []
+    let response_text = ''
 
     if (p.length != 2) {
-        attachments = [{
-            text: 'That\'s not a vaild license plate. Please use the `/parkingbot move <licence>` format!'
-        }]
+        response_text = 'That\'s not a vaild license plate. Please use the `/parkingbot move <licence>` format!'
     } else {
         const plate = p[1].toUpperCase()
 
         let slack_id = await query.getUsernameByPlate(plate, team_id)
 
         if (slack_id == '') {
-            attachments = [{
-                text: 'License plate was not found.'
-            }]
+            response_text = 'License plate was not found.'
         } else {
-            attachments = [{
-                text: '<@' + slack_id + '>, move your car!'
-            }]
+            response_text = '<@' + slack_id + '>, move your car!'
         }
 
     }
 
     let msg = _.defaults({
         channel: payload.channel_name,
-        attachments: attachments
+        text: response_text
     }, msgDefaults)
 
     res.set('content-type', 'application/json')
