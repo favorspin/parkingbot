@@ -33,7 +33,7 @@ const handler = async (payload, res) => {
                 slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
             } else {
                 response_text = p[1] + ' is not a valid username. Aborting.'
-                skipadd = true
+                let skipadd = true
             }
 
         }
