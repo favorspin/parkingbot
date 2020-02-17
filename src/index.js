@@ -12,6 +12,8 @@ const commands = require('./commands')
 const helpCommand = require('./commands/help')
 const db = require('./db')
 
+let bot = require('./bot')
+
 // const path = require('path')
 
 /**
