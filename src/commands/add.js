@@ -36,7 +36,6 @@ const handler = async (payload, res) => {
                 skipadd = true
             }
 
-            slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
         }
 
         if (!skipadd) {
