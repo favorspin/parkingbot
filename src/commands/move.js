@@ -17,7 +17,7 @@ const handler = async (payload, res) => {
     let response_text = ''
 
     if (p.length != 2) {
-        response_text = 'That\'s not a vaild license plate. Please use the `/parkingbot move <licence>` format!'
+        response_text = 'That\'s not a vaild license plate. Please use the `/parking move <licence>` format!'
     } else {
         const plate = p[1].toUpperCase()
 

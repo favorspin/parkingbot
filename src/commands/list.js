@@ -18,7 +18,7 @@ const handler = async (payload, res) => {
     let response_text = ''
 
     if (p.length < 1 || p.length > 2) {
-        response_text = 'That\'s not a vaild command. Please use the `/parkingbot list` format!'
+        response_text = 'That\'s not a vaild command. Please use the `/parking list` format!'
     } else {
         if (p.length == 2) {
             slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')

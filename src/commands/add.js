@@ -23,7 +23,7 @@ const handler = async (payload, res) => {
     if (carid) {
         response_text = plate + ' already exists!'
     } else if (p.length < 2 || p.length > 3) {
-        response_text = 'That\'s not a vaild command. Please use the `/parkingbot add <license plate>` format!'
+        response_text = 'That\'s not a vaild command. Please use the `/parking add <license plate>` format!'
     } else {
         if (p.length == 3) {
             slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
