@@ -27,6 +27,8 @@ const handler = async (payload, res) => {
     } else {
         if (p.length == 3) {
 
+            let re = new RegExp("<@.+\|.+>")
+
             if (re.test(p[1])) {
                 slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
             } else {
