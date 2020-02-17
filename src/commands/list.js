@@ -48,4 +48,4 @@ const handler = async (payload, res) => {
     return
 }
 
-module.exports = { pattern: /^list/ig, handler: handler }
+module.exports = { pattern: /^list\b/ig, handler: handler }
