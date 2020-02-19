@@ -31,7 +31,7 @@ const handler = async (payload, res) => {
             let re = new RegExp("<@.+\|.+>")
 
             if (re.test(p[2])) {
-                slack_id = p[2].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
+                slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
                 response_text = p[2] + ' is not a valid username. Aborting.'
                 skipadd = true

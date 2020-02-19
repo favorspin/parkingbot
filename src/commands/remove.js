@@ -41,4 +41,4 @@ const handler = async (payload, res) => {
     return
 }
 
-module.exports = { pattern: /(^remove|^delete)\b/ig, handler: handler }
+module.exports = { pattern: /^(remove|delete)\b/ig, handler: handler }

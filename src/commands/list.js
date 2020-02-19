@@ -3,6 +3,7 @@
 const _ = require('lodash')
 const config = require('../config')
 const query = require('../db/query')
+const bot = rquire('../bot')
 
 const msgDefaults = {
     response_type: 'in_channel',
@@ -27,15 +28,15 @@ const handler = async (payload, res) => {
             let re = new RegExp("<@.+\|.+>")
 
             if (re.test(p[1])) {
-                slack_id = p[1].match(/@.*\|/).toString().replace(/(@|\|)/g,'')
+                slack_id = p[1].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
-                response_text = p[1] + ' is not a valid username - using current user, instead. '
+                response_text = p[1] + ' is not a valid username. Using current user instead.\n'
             }
 
         }
         let cars = await query.getAllCarsForUser(slack_id, team_id)
         if (_.isEmpty(cars)) {
-            response_text = response_text + 'There are no cars `ed to <@' + slack_id + '>'
+            response_text = response_text + 'There are no cars attached to <@' + slack_id + '>'
         } else {
             if (cars.length == 1) {
                 response_text = response_text + 'There is 1 car attached to <@' + slack_id + '>:'
@@ -51,7 +52,10 @@ const handler = async (payload, res) => {
     let msg = _.defaults({
         channel: payload.channel_name,
         text: response_text
+        user = payload.user_id
     }, msgDefaults)
+
+    bot.postEphemeral(msg)
 
     res.set('content-type', 'application/json')
     res.status(200).json(msg)

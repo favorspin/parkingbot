@@ -90,8 +90,8 @@ app.listen(config('PORT'), (err) => {
 
     console.log(`\n🚀  ParkingBot LIVES on PORT ${config('PORT')} 🚀`)
 
-    if (config('SLACK_TOKEN')) {
-        console.log(`🤖 beep boop: @parkingbot is real-time\n`)
-        bot.listen({ token: config('SLACK_TOKEN') })
-   }
+   //  if (config('SLACK_TOKEN')) {
+   //      console.log(`🤖 beep boop: @parkingbot is real-time\n`)
+   //      bot.listen({ token: config('SLACK_TOKEN') })
+   // }
 })
