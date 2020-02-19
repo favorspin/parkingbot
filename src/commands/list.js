@@ -3,7 +3,7 @@
 const _ = require('lodash')
 const config = require('../config')
 const query = require('../db/query')
-const bot = rquire('../bot')
+const bot = require('../bot')
 
 const msgDefaults = {
     response_type: 'in_channel',
