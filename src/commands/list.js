@@ -8,7 +8,8 @@ const bot = require('../bot')
 const msgDefaults = {
     response_type: 'in_channel',
     username: 'ParkingBot',
-    icon_emoji: config('ICON_EMOJI')
+    icon_emoji: config('ICON_EMOJI'),
+    token: config('SLACK_TOKENE')
 }
 
 const handler = async (payload, res) => {
