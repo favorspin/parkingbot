@@ -6,7 +6,7 @@ const query = require('../db/query')
 const bot = require('../bot')
 
 const msgDefaults = {
-    response_type: 'ephemeral',
+
     username: 'ParkingBot',
     icon_emoji: config('ICON_EMOJI'),
     token: config('SLACK_TOKEN')
@@ -56,10 +56,11 @@ const handler = async (payload, res) => {
         user: slack_id
     }, msgDefaults)
 
-    // bot.postEphemeral(msg)
+    bot.postEphemeral(msg)
 
-    res.set('content-type', 'application/json')
-    res.status(201).json(msg)
+    // res.set('content-type', 'application/json')
+    // res.status(201).json(msg)
+    res.sendStatus(201)
     return
 }
 
