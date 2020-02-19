@@ -51,7 +51,7 @@ const handler = async (payload, res) => {
     }
 
     let msg = _.defaults({
-        channel: payload.channel_name,
+        channel: payload.channel_id,
         text: response_text,
         user: slack_id
     }, msgDefaults)
