@@ -52,7 +52,7 @@ const handler = async (payload, res) => {
     let msg = _.defaults({
         channel: payload.channel_name,
         text: response_text,
-        user = payload.user_id
+        user: payload.user_id
     }, msgDefaults)
 
     bot.postEphemeral(msg)
