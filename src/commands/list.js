@@ -51,7 +51,7 @@ const handler = async (payload, res) => {
             }
         }
     }
-
+    // force update
     let msg = _.defaults({
         channel: payload.channel_name,
         text: response_text,
