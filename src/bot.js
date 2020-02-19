@@ -4,7 +4,6 @@ const Slack = require('slack');
 const _ = require('lodash');
 const config = require('./config');
 
-// let bot = slack.rtm.client();
 const bot = new Slack({token: config('SLACK_TOKEN')})
 
 // bot.started((payload) => {
@@ -29,12 +28,6 @@ const bot = new Slack({token: config('SLACK_TOKEN')})
 //         console.log(`🤖  beep boop: I responded with "${txt}"`);
 //     });
 // });
-
-;(async function main() {
-  // logs {args:{hyper:'card'}}
-  var result = await bot.api.test({hyper:'card'})
-  console.log(result)
-})()
 
 const postEphemeral = async (msg) => {
     bot.chat.postEphemeral(msg)

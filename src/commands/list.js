@@ -3,9 +3,7 @@
 const _ = require('lodash')
 const config = require('../config')
 const query = require('../db/query')
-// const bot = require('../bot')
-const Slack = require('slack')
-const bot = new Slack({token: config('SLACK_TOKEN')})
+const bot = require('../bot')
 
 const msgDefaults = {
     response_type: 'in_channel',
@@ -51,7 +49,7 @@ const handler = async (payload, res) => {
             }
         }
     }
-    // force update
+
     let msg = _.defaults({
         channel: payload.channel_name,
         text: response_text,
