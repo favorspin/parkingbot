@@ -3,7 +3,9 @@
 const _ = require('lodash')
 const config = require('../config')
 const query = require('../db/query')
-const bot = require('../bot')
+// const bot = require('../bot')
+const Slack = require('slack')
+const bot = new Slack({token: config('SLACK_TOKEN')})
 
 const msgDefaults = {
     response_type: 'in_channel',
@@ -56,7 +58,7 @@ const handler = async (payload, res) => {
         user: slack_id
     }, msgDefaults)
 
-    bot.postEphemeral(msg)
+    bot.chat.postEphemeral(msg)
 
     res.set('content-type', 'application/json')
     res.status(200).json(msg)
