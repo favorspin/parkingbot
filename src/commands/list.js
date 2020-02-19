@@ -59,7 +59,7 @@ const handler = async (payload, res) => {
     bot.postEphemeral(msg)
 
     // res.set('content-type', 'application/json')
-    res.status(200) //.json(msg)
+    res.status(201) //.json(msg)
     return
 }
 
