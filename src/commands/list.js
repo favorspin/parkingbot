@@ -56,7 +56,7 @@ const handler = async (payload, res) => {
         user: slack_id
     }, msgDefaults)
 
-    bot.chat.postEphemeral(msg)
+    bot.postEphemeral(msg)
 
     res.set('content-type', 'application/json')
     res.status(200).json(msg)
