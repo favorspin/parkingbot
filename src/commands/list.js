@@ -9,7 +9,7 @@ const msgDefaults = {
     response_type: 'in_channel',
     username: 'ParkingBot',
     icon_emoji: config('ICON_EMOJI'),
-    token: config('SLACK_TOKENE')
+    token: config('SLACK_TOKEN')
 }
 
 const handler = async (payload, res) => {
