@@ -60,7 +60,7 @@ const handler = async (payload, res) => {
 
     // res.set('content-type', 'application/json')
     // res.status(201).json(msg)
-    res.sendStatus(200)
+    res.status(200).end()
     return
 }
 
