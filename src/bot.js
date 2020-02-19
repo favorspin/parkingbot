@@ -30,6 +30,8 @@ const bot = new Slack(config('SLACK_TOKEN'))
 //     });
 // });
 
+bot.api.test({hello:'world'}, console.log)
+
 const postEphemeral = async (msg) => {
     bot.chat.postEphemeral(msg)
 }
