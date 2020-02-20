@@ -15,16 +15,22 @@ const msgDefaults = {
 }
 
 const postEphemeral = async (payload) => {
-    console.log(payload)
 
     let msg = _.defaults(payload, msgDefaults)
-
-    console.log(msg)
 
     bot.chat.postEphemeral(msg)
 }
 
+const postMessage = async (payload) => {
+    let msg = _.defaults(payload, msgDefaults)
+
+    bot.chat.postMessage(msg)
+}
+
+const
+
 // module.exports = bot;
 module.exports = {
-    postEphemeral: postEphemeral
+    postEphemeral: postEphemeral,
+    postMessage: postMessage
 }
