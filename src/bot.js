@@ -36,9 +36,16 @@ const postPrivateMessage = async (user, payload) => {
     bot.chat.postMessage(msg)
 }
 
+const checkChannel = async (payload) => {
+    let msg = _.defaults(payload, {token: token})
+
+    let ci = await bot.channels.info(msg)
+}
+
 // module.exports = bot;
 module.exports = {
     postEphemeral: postEphemeral,
     postMessage: postMessage,
-    postPrivateMessage: postPrivateMessage
+    postPrivateMessage: postPrivateMessage,
+    checkChannel: checkChannel
 }
