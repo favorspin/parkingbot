@@ -29,10 +29,10 @@ const handler = (payload, res) => {
     // }, msgDefaults)
 
     let msg = {
-        channel: payload.channel_name,
+        channel: payload.channel_id,
         attachments: attachments,
-        user: requester_id,
-        text: ''
+        text: '',
+        user: requester_id
     }
 
     bot.postEphemeral(msg)
