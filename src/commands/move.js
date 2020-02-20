@@ -9,6 +9,7 @@ const handler = async (payload, res) => {
     let p = payload.text.trim().split(/\s+/)
     let team_id = payload.team_id
     let requester_id = payload.user_id
+    let slack_id = requester_id
     let response_text = ''
 
     if (p.length != 2) {
@@ -16,7 +17,7 @@ const handler = async (payload, res) => {
     } else {
         const plate = p[1].toUpperCase()
 
-        let slack_id = await query.getUsernameByPlate(plate, team_id)
+        slack_id = await query.getUsernameByPlate(plate, team_id)
 
         console.log(slack_id)
 
