@@ -1,12 +1,13 @@
 'use strict'
 
 const config = require('../config')
+const bot = require('../bot')
 
-const msgDefaults = {
-    response_type: 'in_channel',
-    username: 'ParkingBot',
-    icon_emoji: config('ICON_EMOJI')
-}
+// const msgDefaults = {
+//     response_type: 'in_channel',
+//     username: 'ParkingBot',
+//     icon_emoji: config('ICON_EMOJI')
+// }
 
 const handler = (payload, res) => {
 
@@ -22,7 +23,7 @@ const handler = (payload, res) => {
     }]
 
     let msg = {
-        channel: payload.channel_name,
+        channel: payload.channel_id,
         user: requester_id,
         attachments: attachments
     }

@@ -34,7 +34,12 @@ const handler = async (payload, res) => {
         user: requester_id
     }
 
+    let msg2 = {
+        text: response_text
+    }
+
     bot.postMessage(msg)
+    bot.postPrivateMessage(slack_id, msg2)
 
     res.status(200).end()
     return

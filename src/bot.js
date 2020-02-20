@@ -11,8 +11,7 @@ const msgDefaults = {
 
     username: 'ParkingBot',
     icon_emoji: config('ICON_EMOJI'),
-    token: token,
-    as_user: 'false'
+    token: token
 }
 
 const postEphemeral = async (payload) => {
@@ -28,8 +27,16 @@ const postMessage = async (payload) => {
     bot.chat.postMessage(msg)
 }
 
+const postPrivateMessage async (user, payload) => {
+
+    let pm = await bot.conversations.open({token: token, users: user})
+
+    let msg = _.defaults(payload, msgDefaults, { channel: pm.channel.id })
+}
+
 // module.exports = bot;
 module.exports = {
     postEphemeral: postEphemeral,
-    postMessage: postMessage
+    postMessage: postMessage,
+    postPrivateMessage: postPrivateMessage
 }
