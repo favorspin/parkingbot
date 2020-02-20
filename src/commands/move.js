@@ -28,6 +28,8 @@ const handler = async (payload, res) => {
 
     }
 
+    console.log(slack_id)
+
     let msg = {
         channel: payload.channel_id,
         text: response_text,
