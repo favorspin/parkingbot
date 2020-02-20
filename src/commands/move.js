@@ -22,22 +22,23 @@ const handler = async (payload, res) => {
         if (slack_id == '') {
             response_text = 'License plate was not found.'
         } else {
-            response_text = '<@' + slack_id + '>, move your car!'
+            response_text = '<@' + slack_id + '>, someone\'s trying to leave! Please move your car!'
         }
 
     }
 
     let msg = {
         channel: payload.channel_id,
+        text: 'Ok! I\'ve sent a message to <@' + slack_id + '>!',
+        user: requester_id
+    }
+
+    let pm = {
         text: response_text
     }
 
-    let msg2 = {
-        text: response_text
-    }
-
-    bot.postMessage(msg)
-    bot.postPrivateMessage(slack_id, msg2)
+    bot.postEphemeral(msg)
+    bot.postPrivateMessage(slack_id, pm)
 
     res.status(200).end()
     return
