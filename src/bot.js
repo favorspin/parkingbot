@@ -27,8 +27,6 @@ const postMessage = async (payload) => {
     bot.chat.postMessage(msg)
 }
 
-const
-
 // module.exports = bot;
 module.exports = {
     postEphemeral: postEphemeral,
