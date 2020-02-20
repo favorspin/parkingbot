@@ -15,6 +15,7 @@ const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
     let team_id = payload.team_id
+    let requester_id = payload.user_id
     let response_text = ''
 
     if (p.length != 2) {
@@ -24,6 +25,8 @@ const handler = async (payload, res) => {
 
         let slack_id = await query.getUsernameByPlate(plate, team_id)
 
+        console.log(slack_id)
+
         if (slack_id == '') {
             response_text = 'License plate was not found.'
         } else {
@@ -32,14 +35,11 @@ const handler = async (payload, res) => {
 
     }
 
-    // let msg = _.defaults({
-    //     channel: slack_id,
-    //     text: response_text
-    // }, msgDefaults)
 
     let msg = {
-        channel: slack_id,
-        text: response_text
+        channel: payload.channel_id,
+        text: response_text,
+        user: requester_id
     }
 
     bot.postMessage(msg)
