@@ -19,8 +19,6 @@ const handler = async (payload, res) => {
 
         slack_id = await query.getUsernameByPlate(plate, team_id)
 
-        console.log(slack_id)
-
         if (slack_id == '') {
             response_text = 'License plate was not found.'
         } else {
@@ -29,12 +27,9 @@ const handler = async (payload, res) => {
 
     }
 
-    console.log(slack_id)
-
     let msg = {
         channel: payload.channel_id,
-        text: response_text,
-        user: requester_id
+        text: response_text
     }
 
     let msg2 = {

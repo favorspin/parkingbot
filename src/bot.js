@@ -32,6 +32,8 @@ const postPrivateMessage = async (user, payload) => {
     let pm = await bot.conversations.open({token: token, users: user})
 
     let msg = _.defaults(payload, msgDefaults, { channel: pm.channel.id })
+
+    bot.chat.postMessage(msg)
 }
 
 // module.exports = bot;
