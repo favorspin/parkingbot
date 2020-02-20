@@ -2,12 +2,13 @@
 
 const _ = require('lodash')
 const config = require('../config')
+const bot = require('../bot')
 
-const msgDefaults = {
-    response_type: 'ephemeral',
-    username: 'ParkingBot',
-    icon_emoji: config('ICON_EMOJI')
-}
+// const msgDefaults = {
+//     response_type: 'ephemeral',
+//     username: 'ParkingBot',
+//     icon_emoji: config('ICON_EMOJI')
+// }
 
 const handler = (payload, res) => {
     let attachments = [{
@@ -19,13 +20,23 @@ const handler = (payload, res) => {
         mrkdwn_in: ['text']
     }]
 
-    let msg = _.defaults({
-        channel: payload.channel_name,
-        attachments: attachments
-    }, msgDefaults)
+    // let msg = _.defaults({
+    //     channel: payload.channel_name,
+    //     attachments: attachments,
+    //     text: ''
+    // }, msgDefaults)
 
-    res.set('content-type', 'application/json')
-    res.status(200).json(msg)
+    let msg = {
+        channel: payload.channel_name,
+        attachments: attachments,
+        text: ''
+    }
+
+    bot.postEphemeral(msg)
+    res.status(200).end()
+
+    // res.set('content-type', 'application/json')
+    // res.status(200).json(msg)
     return
 }
 
