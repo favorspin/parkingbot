@@ -25,7 +25,7 @@ const handler = async (payload, res) => {
         }
         response_text = plate + result
     }
-//
+
     let msg = {
         channel: payload.channel_id,
         text: response_text,

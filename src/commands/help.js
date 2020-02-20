@@ -23,7 +23,7 @@ const handler = (payload, res) => {
 
     let msg = {
         channel: payload.channel_name,
-        user: requester_id
+        user: requester_id,
         attachments: attachments
     }
 
