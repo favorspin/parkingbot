@@ -1,14 +1,19 @@
 {
   "name": "parkingbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A help Slackbot to request someone to move their car.",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "node ./src"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "slack",
+    "bot",
+    "parking",
+    "parkingbot"
+  ],
+  "author": "Spin Rodriguez",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.2"
