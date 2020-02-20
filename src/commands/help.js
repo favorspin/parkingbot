@@ -11,6 +11,8 @@ const bot = require('../bot')
 // }
 
 const handler = (payload, res) => {
+    let requester_id = payload.user_id
+
     let attachments = [{
         title: 'ParkingBot can help you move the car that\'s blocking you in!',
         color: '#2FA44F',
@@ -29,6 +31,7 @@ const handler = (payload, res) => {
     let msg = {
         channel: payload.channel_name,
         attachments: attachments,
+        user: requester_id,
         text: ''
     }
 
