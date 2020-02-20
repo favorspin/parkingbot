@@ -12,7 +12,7 @@ const msgDefaults = {
     username: 'ParkingBot',
     icon_emoji: config('ICON_EMOJI'),
     token: token,
-    as_user: false
+    as_user: 'false'
 }
 
 const postEphemeral = async (payload) => {
