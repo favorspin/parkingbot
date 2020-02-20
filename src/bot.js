@@ -27,7 +27,7 @@ const postMessage = async (payload) => {
     bot.chat.postMessage(msg)
 }
 
-const postPrivateMessage async (user, payload) => {
+const postPrivateMessage = async (user, payload) => {
 
     let pm = await bot.conversations.open({token: token, users: user})
 
