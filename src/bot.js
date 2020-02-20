@@ -39,7 +39,9 @@ const postPrivateMessage = async (user, payload) => {
 const checkChannel = async (payload) => {
     let msg = _.defaults(payload, {token: token})
 
-    let ci = await bot.channels.info(msg)
+    let ci = await bot.conversations.info(msg)
+
+    console.log(ci)
 }
 
 // module.exports = bot;
