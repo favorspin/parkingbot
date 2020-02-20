@@ -10,3 +10,5 @@ const handler = async (payload, res) => {
     res.status(200).end()
     return
 }
+
+module.exports = { pattern: /^channel\b/ig, handler: handler }
