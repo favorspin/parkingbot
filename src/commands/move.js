@@ -1,15 +1,8 @@
 'use strict'
 
-const _ = require('lodash')
 const config = require('../config')
 const query = require('../db/query')
 const bot = require('../bot')
-
-// const msgDefaults = {
-//     response_type: 'in_channel',
-//     username: 'ParkingBot',
-//     icon_emoji: config('ICON_EMOJI')
-// }
 
 const handler = async (payload, res) => {
 
@@ -35,7 +28,6 @@ const handler = async (payload, res) => {
 
     }
 
-
     let msg = {
         channel: payload.channel_id,
         text: response_text,
@@ -45,9 +37,6 @@ const handler = async (payload, res) => {
     bot.postMessage(msg)
 
     res.status(200).end()
-
-    // res.set('content-type', 'application/json')
-    // res.status(200).json(msg)
     return
 }
 
