@@ -1,6 +1,5 @@
 'use strict'
 
-const _ = require('lodash')
 const config = require('../config')
 const query = require('../db/query')
 const bot = require('../bot')
@@ -8,7 +7,8 @@ const bot = require('../bot')
 const handler = async (payload, res) => {
 
     let p = payload.text.trim().split(/\s+/)
-    let slack_id = payload.user_id
+    let requester_id = payload.user_id
+    let slack_id = requester_id
     let team_id = payload.team_id
     let response_text = ''
     let plate = p[1] || ''
@@ -50,7 +50,7 @@ const handler = async (payload, res) => {
     let msg = {
         channel: payload.channel_id,
         text: response_text,
-        user: slack_id
+        user: requester_id
     }
 
     bot.postEphemeral(msg)

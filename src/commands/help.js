@@ -1,6 +1,5 @@
 'use strict'
 
-const _ = require('lodash')
 const config = require('../config')
 
 const msgDefaults = {
@@ -10,6 +9,9 @@ const msgDefaults = {
 }
 
 const handler = (payload, res) => {
+
+    let requester_id = payload.user_id
+
     let attachments = [{
         title: 'Parkingbot can help you move the car that\'s blocking you in!',
         color: '#2FA44F',
@@ -19,13 +21,15 @@ const handler = (payload, res) => {
         mrkdwn_in: ['text']
     }]
 
-    let msg = _.defaults({
+    let msg = {
         channel: payload.channel_name,
+        user: requester_id
         attachments: attachments
-    }, msgDefaults)
+    }
 
-    res.set('content-type', 'application/json')
-    res.status(200).json(msg)
+    bot.postEphemeral(msg)
+
+    res.status(200).end()
     return
 }
 
