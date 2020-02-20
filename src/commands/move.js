@@ -1,6 +1,5 @@
 'use strict'
 
-const config = require('../config')
 const query = require('../db/query')
 const bot = require('../bot')
 
@@ -15,7 +14,7 @@ const handler = async (payload, res) => {
     if (p.length != 2) {
         response_text = 'That\'s not a vaild license plate. Please use the `/parking move <licence>` format!'
     } else {
-        const plate = p[1].toUpperCase()
+        const plate = p[1].toUpperCase().replace(/[^A-Z0-9]+/ig,'')
 
         slack_id = await query.getUsernameByPlate(plate, team_id)
 

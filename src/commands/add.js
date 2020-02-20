@@ -1,6 +1,5 @@
 'use strict'
 
-const config = require('../config')
 const query = require('../db/query')
 const bot = require('../bot')
 
@@ -10,13 +9,14 @@ const handler = async (payload, res) => {
     let requester_id = payload.user_id
     let slack_id = requester_id
     let team_id = payload.team_id
+    let channel_id = payload.channel_id
     let response_text = ''
     let plate = p[1] || ''
     let skipadd = false
-    plate = plate.toUpperCase()
-    let carid = await query.getCar(plate, team_id)
+    plate = plate.toUpperCase().replace(/[^A-Z0-9]+/ig,'')
+    let car_id = await query.getCar(plate, team_id)
 
-    if (carid) {
+    if (car_id) {
         response_text = plate + ' already exists!'
     } else if (p.length < 2 || p.length > 3) {
         response_text = 'That\'s not a vaild command. Please use the `/parking add <license plate>` format!'
@@ -48,7 +48,7 @@ const handler = async (payload, res) => {
     }
 
     let msg = {
-        channel: payload.channel_id,
+        channel: channel_id,
         text: response_text,
         user: requester_id
     }

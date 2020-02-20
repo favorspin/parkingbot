@@ -1,8 +1,4 @@
-// index.js
-
-/**
- * Required External Modules
- */
+'use strict'
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -12,25 +8,9 @@ const commands = require('./commands')
 const helpCommand = require('./commands/help')
 const db = require('./db')
 
-// let bot = require('./bot')
-
-// const path = require('path')
-
-/**
- * App Variables
- */
-
 const app = express()
 
-/**
- *  App Configuration
- */
-
 db.connect()
-
-/**
- * Routes Definitions
- */
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -41,8 +21,6 @@ app.get('/', (req, res) => {
 
 app.post('/commands/parkingbot', (req, res) => {
     let payload = req.body
-
-    // console.log(payload)
 
     if (!payload || Object.keys(payload).length == 0 || payload.token !== config('PARKINGBOT_COMMAND_TOKEN')) {
         let err = '✋ Huh? An invalid slash token was provided.\n' +
@@ -81,17 +59,12 @@ app.post('/commands/parkingbot/move', (req, res) => {
     cmd.handler(payload, res)
 })
 
-/**
- * Server Activation
- */
-
 app.listen(config('PORT'), (err) => {
     if (err) throw err
 
     console.log(`\n🚀  ParkingBot LIVES on PORT ${config('PORT')} 🚀`)
 
-   //  if (config('SLACK_TOKEN')) {
-   //      console.log(`🤖 beep boop: @parkingbot is real-time\n`)
-   //      bot.listen({ token: config('SLACK_TOKEN') })
-   // }
+    if (config('SLACK_TOKEN')) {
+        console.log(`🤖 beep boop: @ParkingBot is live\n`)
+   }
 })

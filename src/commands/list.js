@@ -1,7 +1,6 @@
 'use strict'
 
 const _ = require('lodash')
-const config = require('../config')
 const query = require('../db/query')
 const bot = require('../bot')
 

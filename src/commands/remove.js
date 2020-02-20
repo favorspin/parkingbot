@@ -1,6 +1,5 @@
 'use strict'
 
-const config = require('../config')
 const query = require('../db/query')
 const bot = require('../bot')
 
@@ -11,7 +10,7 @@ const handler = async (payload, res) => {
     let response_text = ''
     let plate = p[1] || ''
     let team_id = payload.team_id
-    plate = plate.toUpperCase()
+    plate = plate.toUpperCase().replace(/[^A-Z0-9]+/ig,'')
     let result = ''
 
     if (p.length != 2) {

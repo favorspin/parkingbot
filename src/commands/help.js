@@ -1,6 +1,5 @@
 'use strict'
 
-const config = require('../config')
 const bot = require('../bot')
 
 const handler = (payload, res) => {

@@ -8,9 +8,6 @@ const token = config('SLACK_TOKEN')
 const bot = new Slack({token: token})
 
 const msgDefaults = {
-
-    username: 'ParkingBot',
-    icon_emoji: config('ICON_EMOJI'),
     token: token
 }
 
