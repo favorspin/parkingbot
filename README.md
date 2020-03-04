@@ -85,5 +85,5 @@ Sends a DM to the plate owner requesting them to move their car. Also returns a 
 ### remove or `/parking remove <PLATE>` (unlisted)
 Removes a plate from any user it is assigned to. It will return an error if the plate can not be found.
 
-### who or `/parking who <PLATE>` or `/parking whois <PLATE>` (unlisted)
+### who or `/parking who <PLATE>` or `/parking whois <PLATE>`
 Returns the user who is assigned to the supplied plate. It will return an error if the plate can not be found.
