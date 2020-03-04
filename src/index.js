@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
     res.status(200).send("👋🌎")
 })
 
+// ParkingBot Commands
 app.post('/commands/parkingbot', (req, res) => {
     let payload = req.body
 

@@ -9,8 +9,8 @@ const config = {
   ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   DATABASE_URL: process.env.DATABASE_URL,
-  PARKINGBOT_COMMAND_TOKEN: process.env.PARKINGBOT_COMMAND_TOKEN || process.env.PARKINGBOT_COMMAND_TOKEN_SR,
-  SLACK_TOKEN: process.env.SLACK_TOKEN || process.env.SLACK_TOKEN
+  PARKINGBOT_COMMAND_TOKEN: process.env.PARKINGBOT_COMMAND_TOKEN,
+  SLACK_TOKEN: process.env.SLACK_TOKEN
 }
 
 module.exports = (key) => {
