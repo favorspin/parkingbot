@@ -20,7 +20,7 @@ const handler = async (payload, res) => {
             response_text = response_text + 'There are no cars assigned to any users in this slack account.'
         } else {
             if (cars.length == 1) {
-                response_text = response_text + 'There is 1 car attached to assigned in this slack account:'
+                response_text = response_text + 'There is 1 car assigned in this slack account:'
             } else {
                 response_text = response_text + 'There are ' + cars.length + ' cars assigned in this slack account:'
             }
