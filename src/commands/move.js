@@ -21,7 +21,8 @@ const handler = async (payload, res) => {
         if (slack_id == '') {
             response_text = 'License plate was not found.'
         } else {
-            response_text = ':wave: Hey <@' + slack_id + '>! <@' + requester_id + '> trying to leave! Please move your car! :car::dash:'
+            response_text = ':wave: Hey <@' + slack_id + '>! <@' + requester_id + '> is trying to leave! \
+                            Please move your car so they can get out! :car::dash:'
         }
 
     }
