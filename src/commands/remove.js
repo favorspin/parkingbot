@@ -18,11 +18,11 @@ const handler = async (payload, res) => {
     } else {
         let removed = await query.removeCar(plate, team_id)
         if (removed) {
-            result = ' has been removed!'
+            result = '` has been removed!'
         } else {
-            result = ' could not be found!'
+            result = '` could not be found!'
         }
-        response_text = plate + result
+        response_text = '`' + plate + result
     }
 
     let msg = {
