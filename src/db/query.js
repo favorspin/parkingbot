@@ -35,6 +35,20 @@ const getAllCarsForUser = async (slack_id, team_id) => {
     }
 }
 
+const getAllCars = async (team_id) => {
+    let q = 'SELECT u.slack_id, ca.license_plate \
+             FROM api.cars ca \
+             JOIN api.users u on u.id = ca.user_id \
+             WHERE ca.team_id = $1 \
+             ORDER BY 1, 2'
+    let result = await db.query(q,[team_id])
+    if (!_.isEmpty(result.rows)) {
+        return result.rows
+    } else {
+        return {}
+    }
+}
+
 const getCar = async (license_plate, team_id) => {
     let q = 'SELECT id \
              FROM api.cars \
@@ -92,6 +106,7 @@ const removeCar = async (license_plate, team_id) => {
 module.exports = {
     createCar: createCar,
     createUser: createUser,
+    getAllCars: getAllCars,
     getAllCarsForUser: getAllCarsForUser,
     getCar: getCar,
     getUser: getUser,
