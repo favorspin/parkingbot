@@ -13,7 +13,7 @@ const handler = async (payload, res) => {
     let response_text = ''
 
     if (p.length != 2) {
-        response_text = 'That\'s not a vaild command. Please use the `/parking who <license plate>` format!'
+        response_text = 'That\'s not a vaild command. Please use the `/parking who <PLATE>` format!'
     } else {
 
         const plate = p[1].toUpperCase().replace(/[^A-Z0-9]+/ig,'')

@@ -14,7 +14,7 @@ const handler = async (payload, res) => {
     let result = ''
 
     if (p.length != 2) {
-        response_text = 'That\'s not a vaild command. Please use the `/parking remove <license plate>` format!'
+        response_text = 'That\'s not a vaild command. Please use the `/parking remove <PLATE>` format!'
     } else {
         let removed = await query.removeCar(plate, team_id)
         if (removed) {

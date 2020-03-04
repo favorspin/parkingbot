@@ -19,7 +19,7 @@ const handler = async (payload, res) => {
     if (car_id) {
         response_text = plate + ' already exists!'
     } else if (p.length < 2 || p.length > 3) {
-        response_text = 'That\'s not a vaild command. Please use the `/parking add <license plate>` format!'
+        response_text = 'That\'s not a vaild command. Please use the `/parking add <PLATE>` format!'
     } else {
         if (p.length == 3) {
 

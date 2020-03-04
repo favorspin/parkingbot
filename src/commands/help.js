@@ -8,9 +8,10 @@ const handler = (payload, res) => {
     let attachments = [{
         title: 'ParkingBot can help you move the car that\'s blocking you in!',
         color: '#2FA44F',
-        text: '`/parking add <LICENSE>` will register your license plate so that moves can be requested. \
-               \n`/parking move <LICENSE>` requests the owner of the car to move so you can get out. \
-               \n`/parking list` will list all Licnese plates attached to your user.',
+        text: '`/parking add <PLATE>` will register your license plate so that moves can be requested. \
+               \n`/parking move <PLATE>` requests the owner of the car to move so you can get out. \
+               \n`/parking list` will list all licnese plates attached to your user. \
+               \n`/parking who <PLATE>` will tell you who is assigned to the given license plate.',
         mrkdwn_in: ['text']
     }]
 
