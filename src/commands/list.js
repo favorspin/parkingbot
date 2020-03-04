@@ -17,8 +17,6 @@ const handler = async (payload, res) => {
     } else {
         if (p.length == 2) {
 
-            // add error handling for incorrect username format
-
             let re = new RegExp("<@.+\|.+>")
 
             if (re.test(p[1])) {
