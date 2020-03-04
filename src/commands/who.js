@@ -39,4 +39,4 @@ const handler = async (payload, res) => {
     return
 }
 
-module.exports = { pattern: /^who\b/ig, handler: handler }
+module.exports = { pattern: /^who(is)?\b/ig, handler: handler }
