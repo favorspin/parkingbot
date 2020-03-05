@@ -26,7 +26,7 @@ const handler = async (payload, res) => {
                text: pm_text
             }
             bot.postPrivateMessage(slack_id, pm)
-            response_text = 'Ok! I\'ve sent a message to the owner of ' + plate + '!'
+            response_text = 'Ok! I\'ve sent a message to the owner of `' + plate + '`!'
         }
 
     }
