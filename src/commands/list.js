@@ -27,7 +27,7 @@ const handler = async (payload, res) => {
             }
 
             if (!is_admin) {
-                'You do not have permission to view plates attached to someone else\'s account. Using current user instaed.'
+                response_text = 'You do not have permission to view plates attached to someone else\'s account. Using current user instaed.'
                 slack_id = requester_id
             }
 

@@ -19,6 +19,9 @@ const handler = async (payload, res) => {
     } else {
         let my_car = await query.getUsernameByPlate(plate)
 
+        console.log(requester_id)
+        console.log(my_car)
+
         if (my_car != requester_id && !is_admin) {
             response_text = 'You are not allowed to remove cars that aren\'t yours.'
         } else {
