@@ -34,7 +34,7 @@ const handler = async (payload, res) => {
                 if (p.length != 3) {
                     response_text = 'That\'s not a valid command. Please use the `/parking admin add @user` format!'
                 } else {
-                    if (re.text(p[2])) {
+                    if (re.test(p[2])) {
                         slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
                     } else {
                         response_text = p[2] + ' is not a valid username. Aborting.'
