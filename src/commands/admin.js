@@ -71,7 +71,7 @@ const handler = async (payload, res) => {
                         if (!user_id) {
                             response_text = '<@' + slack_id + '> is not a user of ParkingBot.'
                         } else {
-                            await query.removeAdmin(user_id)
+                            await query.removeAdmin(user_id, team_id)
 
                             response_text = 'OK! I have removed <@' + slack_id + '> as an admin for ParkingBot.'
                         }
