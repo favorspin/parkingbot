@@ -20,22 +20,22 @@ const handler = async (payload, res) => {
     } else {
 
         //commands
-        switch(p[1]) {
-            case 'list':
+        switch(true) {
+            case /list/.test(p[1]):
                 let admins = await query.getAllAdmins()
                 response_text = 'There are ' + admins.length + ' admins assigned to ParkingBot:'
                 for (var i = 0; i < admins.length; i++) {
                     response_text = response_text + '\n <@' + admins[i].slack_id + '>'
                 }
                 break
-            case 'add':
+            case /add/.test(p[1]):
                 console.log('add')
                 break
-            case 'remove':
+            case /(rm|remove|del(ete)?)/.test(p[1])
                 console.log('remove')
                 break
             default:
-                console.log('default')
+                response_text = 'That\'s not a vaild command. Please use the `/parking admin [command] (@user)` format!'
 
         }
     }
