@@ -76,6 +76,7 @@ const handler = async (payload, res) => {
                             response_text = 'OK! I have removed <@' + slack_id + '> as an admin for ParkingBot.'
                         }
                     }
+                }
                 break
             default:
                 response_text = 'That\'s not a vaild command. Please use the `/parking admin [command] (@user)` format!'
