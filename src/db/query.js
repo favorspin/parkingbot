@@ -35,6 +35,14 @@ const getAllCarsForUser = async (slack_id, team_id) => {
     }
 }
 
+const getAllAdmins = async () => {
+    let q = 'SELECT slack_id \
+             FROM api.users \
+             WHERE is_admin'
+    let result = await db.query(q,[])
+    return result.rows
+}
+
 const getAllCars = async (team_id) => {
     let q = 'SELECT u.slack_id, ca.license_plate \
              FROM api.cars ca \
@@ -88,6 +96,20 @@ const getUsernameByPlate = async (license_plate, team_id) => {
         return result.rows[0]['slack_id']
     } else {
         return ''
+    }
+}
+
+const isAdmin = async (slack_id, team_id) => {
+    let q = 'SELECT is_admin \
+             FROM api.users u \
+             WHERE u.slack_id = $1 \
+             AND u.team_id = $2'
+    let result = await db.query(q,[slack_id, team_id])
+
+    if (!_.isEmpty(result.rows)) {
+        return result.rows[0][is_admin]
+    } else {
+        return false
     }
 }
 
