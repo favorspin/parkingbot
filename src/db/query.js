@@ -47,7 +47,8 @@ const getAllCarsForUser = async (slack_id, team_id) => {
 const getAllAdmins = async () => {
     let q = 'SELECT slack_id \
              FROM api.users \
-             WHERE is_admin'
+             WHERE is_admin \
+             ORDER BY 1'
     let result = await db.query(q,[])
     return result.rows
 }
@@ -122,6 +123,16 @@ const isAdmin = async (slack_id, team_id) => {
     }
 }
 
+const removeAdmin = async (slack_id, team_id) => {
+    let q = 'UPDATE api.users \
+             SET is_admin = false \
+             WHERE slack_id = $1 \
+             AND team_id = $2'
+    await db.query(q,[slack_id,team_id])
+
+    return
+}
+
 const removeCar = async (license_plate, team_id) => {
     let carid = await getCar(license_plate, team_id)
     if (carid) {
@@ -145,5 +156,6 @@ module.exports = {
     getUser: getUser,
     getUsernameByPlate: getUsernameByPlate,
     isAdmin: isAdmin,
+    removeAdmin: removeAdmin,
     removeCar: removeCar
 }

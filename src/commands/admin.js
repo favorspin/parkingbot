@@ -13,7 +13,7 @@ const handler = async (payload, res) => {
     let response_text = ''
     let is_admin = await query.isAdmin(requester_id, team_id)
     let re = new RegExp("<@.+\|.+>")
-    let skipadd = false
+    let skip = false
 
     if (p.length < 2 || p.length > 3) {
         response_text = 'That\'s not a vaild command. Please use the `/parking admin [command] (@user)` format!'
@@ -38,10 +38,10 @@ const handler = async (payload, res) => {
                         slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
                     } else {
                         response_text = p[2] + ' is not a valid username. Aborting.'
-                        skipadd = true
+                        skip = true
                     }
 
-                    if (!skipadd) {
+                    if (!skip) {
                         let user_id = await query.getUser(slack_id, team_id)
 
                         if (!user_id) {
@@ -55,7 +55,27 @@ const handler = async (payload, res) => {
                 }
                 break
             case /(rm|remove|del(ete)?)/.test(p[1]):
-                console.log('remove')
+                if (p.length != 3) {
+                    response_text = 'That\'s not a valid command. Please use the `/parking admin add @user` format!'
+                } else {
+                    if (re.test(p[2])) {
+                        slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
+                    } else {
+                        response_text = p[2] + ' is not a valid username. Aborting.'
+                        skip = true
+                    }
+
+                    if (!skip) {
+                        let user_id = await query.getUser(slack_id, team_id)
+
+                        if (!user_id) {
+                            response_text = '<@' + slack_id + '> is not a user of ParkingBot.'
+                        } else {
+                            await query.removeAdmin(user_id)
+
+                            response_text = 'OK! I have removed <@' + slack_id + '> as an admin for ParkingBot.'
+                        }
+                    }
                 break
             default:
                 response_text = 'That\'s not a vaild command. Please use the `/parking admin [command] (@user)` format!'
