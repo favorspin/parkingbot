@@ -123,12 +123,11 @@ const isAdmin = async (slack_id, team_id) => {
     }
 }
 
-const removeAdmin = async (slack_id, team_id) => {
+const removeAdmin = async (user_id) => {
     let q = 'UPDATE api.users \
              SET is_admin = false \
-             WHERE slack_id = $1 \
-             AND team_id = $2'
-    await db.query(q,[slack_id,team_id])
+             WHERE id = $1'
+    await db.query(q,[user_id])
 
     return
 }
