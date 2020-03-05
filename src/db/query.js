@@ -3,7 +3,7 @@
 const db = require('../db')
 const _ = require('lodash')
 
-const addAdmin = async (user_id) => {
+const createAdmin = async (user_id) => {
     let q = 'UPDATE api.users \
              SET is_admin = true \
              WHERE id = $1'
@@ -145,7 +145,7 @@ const removeCar = async (license_plate, team_id) => {
 }
 
 module.exports = {
-    addAdmin: addAdmin,
+    createAdmin: createAdmin,
     createCar: createCar,
     createUser: createUser,
     getAllAdmins: getAllAdmins,

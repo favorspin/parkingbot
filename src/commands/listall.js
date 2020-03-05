@@ -10,35 +10,28 @@ const handler = async (payload, res) => {
     let requester_id = payload.user_id
     let slack_id = requester_id
     let team_id = payload.team_id
-    let response_text = ''
     let is_admin = await query.isAdmin(requester_id, team_id)
-
-    if (!is_admin) {
-        response_text = 'You do not have permission to list all plates.'
-    } else {
-        if (p.length != 1) {
-            response_text = 'That\'s not a vaild command. Please use the `/parking listall` format!'
-        } else {
-            let cars = await query.getAllCars(team_id)
-            if (_.isEmpty(cars)) {
-                response_text = response_text + 'There are no cars assigned to any users in this slack account.'
-            } else {
-                if (cars.length == 1) {
-                    response_text = response_text + 'There is 1 car assigned in this slack account:'
-                } else {
-                    response_text = response_text + 'There are ' + cars.length + ' cars assigned in this slack account:'
-                }
-                for (var i = 0; i < cars.length; i++) {
-                    response_text = response_text + '\n <@' + cars[i].slack_id + '> - `' + cars[i].license_plate + '`'
-                }
-            }
-        }
-    }
 
     let msg = {
         channel: payload.channel_id,
-        text: response_text,
+        text: '',
         user: requester_id
+    }
+
+    if (!is_admin) {
+        msg.text = 'You do not have permission to list all plates.'
+    } else if (p.length != 1) {
+        msg.text = 'That\'s not a vaild command. Please use the `/parking listall` format!'
+    } else {
+        let cars = await query.getAllCars(team_id)
+        if (_.isEmpty(cars)) {
+            msg.text = msg.text + 'There are no cars assigned to any users in this slack account.'
+        } else {
+            msg.text = msg.text + 'There are ' + cars.length + ' cars assigned in this slack account:'
+            for (var i = 0; i < cars.length; i++) {
+                msg.text = msg.text + '\n <@' + cars[i].slack_id + '> - `' + cars[i].license_plate + '`'
+            }
+        }
     }
 
     bot.postEphemeral(msg)

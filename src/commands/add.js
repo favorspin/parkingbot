@@ -9,16 +9,14 @@ const handler = async (payload, res) => {
     let requester_id = payload.user_id
     let slack_id = requester_id
     let team_id = payload.team_id
-    let channel_id = payload.channel_id
-    let response_text = ''
     let plate = p[1] || ''
     plate = plate.toUpperCase().replace(/[^A-Z0-9]+/ig,'')
     let car_id = await query.getCar(plate, team_id)
     let is_admin = await query.isAdmin(requester_id, team_id)
 
     let msg = {
-        channel: channel_id,
-        text: response_text,
+        channel: payload.channel_id,
+        text: '',
         user: requester_id
     }
 
@@ -57,7 +55,6 @@ const handler = async (payload, res) => {
     }
 
     bot.postEphemeral(msg)
-
     res.status(200).end()
     return
 }

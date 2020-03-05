@@ -10,32 +10,31 @@ const handler = async (payload, res) => {
     let requester_id = payload.user_id
     let slack_id = requester_id
     let team_id = payload.team_id
-    let response_text = ''
     let is_admin = await query.isAdmin(requester_id, team_id)
 
+    let msg = {
+        channel: payload.channel_id,
+        text: '',
+        user: requester_id
+    }
+
     if (p.length != 2) {
-        response_text = 'That\'s not a vaild command. Please use the `/parking who <PLATE>` format!'
+        msg.text = 'That\'s not a vaild command. Please use the `/parking who <PLATE>` format!'
     } else {
 
         if (!is_admin) {
-            response_text = 'You are not allowed to see the owners of cars.'
+            msg.text = 'You are not allowed to see the owners of cars.'
         } else {
             const plate = p[1].toUpperCase().replace(/[^A-Z0-9]+/ig,'')
 
             slack_id = await query.getUsernameByPlate(plate, team_id)
 
             if (slack_id == '') {
-                response_text = 'License plate was not found.'
+                msg.text = 'License plate was not found.'
             } else {
-                response_text = '`' + plate + '` is currently assigned to <@' + slack_id + '>.'
+                msg.text = '`' + plate + '` is currently assigned to <@' + slack_id + '>.'
         }
         }
-    }
-
-    let msg = {
-        channel: payload.channel_id,
-        text: response_text,
-        user: requester_id
     }
 
     bot.postEphemeral(msg)
