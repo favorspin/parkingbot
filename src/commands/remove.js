@@ -17,10 +17,7 @@ const handler = async (payload, res) => {
     if (p.length != 2) {
         response_text = 'That\'s not a vaild command. Please use the `/parking remove <PLATE>` format!'
     } else {
-        let my_car = await query.getUsernameByPlate(plate)
-
-        console.log('requester_id: ' + requester_id)
-        console.log('my_car: ' + my_car)
+        let my_car = await query.getUsernameByPlate(plate, team_id)
 
         if (my_car != requester_id && !is_admin) {
             response_text = 'You are not allowed to remove cars that aren\'t yours.'
