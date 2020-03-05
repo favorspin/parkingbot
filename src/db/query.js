@@ -128,10 +128,12 @@ const removeCar = async (license_plate, team_id) => {
 module.exports = {
     createCar: createCar,
     createUser: createUser,
+    getAllAdmins: getAllAdmins,
     getAllCars: getAllCars,
     getAllCarsForUser: getAllCarsForUser,
     getCar: getCar,
     getUser: getUser,
     getUsernameByPlate: getUsernameByPlate,
+    isAdmin: isAdmin,
     removeCar: removeCar
 }

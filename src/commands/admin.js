@@ -11,7 +11,7 @@ const handler = async (payload, res) => {
     let slack_id = requester_id
     let team_id = payload.team_id
     let response_text = ''
-    let is_admin = await query.isAdmin(rquester_id)
+    let is_admin = await query.isAdmin(requester_id)
 
     if (p.length < 2 || p.length > 3) {
         response_text = 'That\'s not a vaild command. Please use the `/parking admin [command] (@user)` format!'
