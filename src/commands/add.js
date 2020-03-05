@@ -22,8 +22,6 @@ const handler = async (payload, res) => {
         user: requester_id
     }
 
-    console.log(payload)
-
     if (car_id) {
         msg.text = plate + ' already exists!'
     } else if (p.length < 2 || p.length > 3) {
