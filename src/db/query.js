@@ -3,7 +3,7 @@
 const db = require('../db')
 const _ = require('lodash')
 
-const addAdmin = asuync (user_id) => {
+const addAdmin = async (user_id) => {
     let q = 'UPDATE api.users \
              SET is_admin = true \
              WHERE id = $1'
