@@ -31,7 +31,7 @@ const handler = async (payload, res) => {
             case /add/.test(p[1]):
                 console.log('add')
                 break
-            case /(rm|remove|del(ete)?)/.test(p[1])
+            case /(rm|remove|del(ete)?)/.test(p[1]):
                 console.log('remove')
                 break
             default:
