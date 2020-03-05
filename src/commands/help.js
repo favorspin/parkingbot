@@ -10,7 +10,7 @@ const handler = (payload, res) => {
         color: '#2FA44F',
         text: '`/parking add <PLATE>` will register your license plate so that moves can be requested. \
                \n`/parking move <PLATE>` requests the owner of the car to move so you can get out. \
-               \n`/parking list` will list all licnese plates attached to your user.',
+               \n`/parking list` will list all license plates attached to your user.',
         mrkdwn_in: ['text']
     }]
 

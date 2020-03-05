@@ -1,7 +1,7 @@
 {
   "name": "parkingbot",
   "version": "1.0.0",
-  "description": "A help Slackbot to request someone to move their car.",
+  "description": "A helpful Slackbot to request someone to move their car.",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/index.js",

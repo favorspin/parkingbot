@@ -31,6 +31,10 @@ app.post('/commands/parkingbot', (req, res) => {
         return
     }
 
+    if (payload.command == '/move') {
+        payload.text = 'move ' + payload.text
+    }
+
     let cmd = _.reduce(commands, (a, cmd) => {
 
         return payload.text.trim().match(cmd.pattern) ? cmd : a
