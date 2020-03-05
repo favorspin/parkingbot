@@ -26,6 +26,8 @@ const handler = async (payload, res) => {
         msg.text = plate + ' already exists!'
     } else if (p.length < 2 || p.length > 3) {
         msg.text = 'That\'s not a vaild command. Please use the `/parking add <PLATE>` format!'
+    } else if (p.length == 3 && !is_admin) {
+        msg.text = 'You are not allowed to add a plate to another user'
     } else {
 
         if (p.length == 3) {
@@ -36,13 +38,6 @@ const handler = async (payload, res) => {
                 slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
                 msg.text = p[2] + ' is not a valid username. Aborting.'
-                bot.postEphemeral(msg)
-                res.status(200).end()
-                return
-            }
-
-            if (!is_admin) {
-                msg.text = 'You are not allowed to add a plate to another user.'
                 bot.postEphemeral(msg)
                 res.status(200).end()
                 return
