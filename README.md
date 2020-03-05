@@ -65,25 +65,37 @@ Note: local dev will require you to create a webserver and point Slack slash com
     }
 
 ## Commands
-Currently, ParkingBot Supports seven commands. While all commands can be accessed by all users, some (or some variations) are not useful for most users and are hidden from the in-Slack instructions as well as the help command. Optional user arguments are left out of all in-Slack instructions.
+Currently, ParkingBot Supports seven commands. Some (or some variations) are only accessible by defined admins, are are not displayed in help on in-Slack instructions.
 
 ### help or `/parking help`
 Lits available commands for users. It does not list all commands or all command variations on purpose.
 
+### admin
+The admin command has several sub-commands. All sub commands are only available to admins.
+
+##### admin list or `/parking admin list`
+Lists all current current ParkingBot Admins in the workspace
+
+##### admin add or `/parking admin add <USER>`
+Adds the specifiied user to the list of admins and grants them permission on all admin-only commands. Returns an error if the user can not be found.
+
+##### admin remove or `/parking admin remove <USER>`
+Removes the specified user from the list of admins and revokes their permissions on all admin-only commands. Returns an error if the user can not be found.
+
 ### add or `/parking add <PLATE> (<USER>)`
-Adds a plate to the current user, or the user supplied if that user exists. It will return an error if the plate already exists on another user or if the supplied user does not exist.
+Adds a plate to the current user, or the user supplied if that user exists. Only admins can add to other users. It will return an error if the plate already exists on another user or if the supplied user does not exist.
 
 ### list or `/parking list (<USER>)`
-Lists all license plates assigned to the current user, or the user supplied if that user exists. If the supplied user does not exist, it will return an invalid username error and instead list all plates assigned to the current user.
+Lists all license plates assigned to the current user, or the user supplied if that user exists. If the supplied user does not exist or the user is not an admin, it will return an invalid username error and instead list all plates assigned to the current user.
 
-### listall or `/parking listall` (unlisted)
-Lists all license plates and assigned users in the Slack workspace.
+### listall or `/parking listall`
+Lists all license plates and assigned users in the Slack workspace. This command is only available to admins.
 
 ### move or `/parking move <PLATE>` or `/move <PLATE>`
 Sends a DM to the plate owner requesting them to move their car. Also returns a confirmation message to the initiator. It will return an error if the plate can not be found amongst the workspace's assigned plates
 
-### remove or `/parking remove <PLATE>` (unlisted)
-Removes a plate from any user it is assigned to. It will return an error if the plate can not be found.
+### remove or `/parking remove <PLATE>`
+Removes a plate from any user it is assigned to. It will return an error if the plate can not be found. Only admins can remove plates that are not assigned to their own account.
 
-### who or `/parking who <PLATE>` or `/parking whois <PLATE>`
-Returns the user who is assigned to the supplied plate. It will return an error if the plate can not be found.
+### who or `/parking who <PLATE>`
+Returns the user who is assigned to the supplied plate. It will return an error if the plate can not be found. Only admins can use this command.
