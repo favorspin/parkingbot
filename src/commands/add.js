@@ -17,10 +17,22 @@ const handler = async (payload, res) => {
     let car_id = await query.getCar(plate, team_id)
     let is_admin = await query.isAdmin(requester_id, team_id)
 
+    let msg = {
+        channel: channel_id,
+        text: response_text,
+        user: requester_id
+    }
+
     if (car_id) {
-        response_text = plate + ' already exists!'
+        msg.text = plate + ' already exists!'
+        bot.postEphemeral(msg)
+        res.status(200).end()
+        return
     } else if (p.length < 2 || p.length > 3) {
-        response_text = 'That\'s not a vaild command. Please use the `/parking add <PLATE>` format!'
+        msg.text = 'That\'s not a vaild command. Please use the `/parking add <PLATE>` format!'
+        bot.postEphemeral(msg)
+        res.status(200).end()
+        return
     } else {
         if (p.length == 3) {
 
@@ -29,34 +41,30 @@ const handler = async (payload, res) => {
             if (re.test(p[2])) {
                 slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
-                response_text = p[2] + ' is not a valid username. Aborting.'
-                skipadd = true
+                msg.text = p[2] + ' is not a valid username. Aborting.'
+                bot.postEphermeral(msg)
+                res.status(200).end()
+                return
             }
 
             if (!is_admin) {
                 response_text = 'You are not allowed to add a plate to another user.'
-                skipadd = true
+                bot.postEphemeral(msg)
+                res.status(200).end()
+                return
             }
         }
 
-        if(!skipadd) {
-            let userid = await query.getUser(slack_id, team_id)
+        let userid = await query.getUser(slack_id, team_id)
 
-            if (!userid) {
-                userid = await query.createUser(slack_id, team_id)
-            }
-
-            await query.createCar(userid, plate, team_id)
-
-            response_text = 'OK! I added `' + plate + '` to <@' + slack_id + '>'
+        if (!userid) {
+            userid = await query.createUser(slack_id, team_id)
         }
 
-    }
+        await query.createCar(userid, plate, team_id)
 
-    let msg = {
-        channel: channel_id,
-        text: response_text,
-        user: requester_id
+        msg.text = 'OK! I added `' + plate + '` to <@' + slack_id + '>'
+
     }
 
     bot.postEphemeral(msg)
