@@ -56,7 +56,7 @@ const handler = async (payload, res) => {
                 break
             case /(rm|remove|del(ete)?)/.test(p[1]):
                 if (p.length != 3) {
-                    response_text = 'That\'s not a valid command. Please use the `/parking admin add @user` format!'
+                    response_text = 'That\'s not a valid command. Please use the `/parking admin remove @user` format!'
                 } else {
                     if (re.test(p[2])) {
                         slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
