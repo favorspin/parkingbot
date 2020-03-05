@@ -12,7 +12,6 @@ const handler = async (payload, res) => {
     let channel_id = payload.channel_id
     let response_text = ''
     let plate = p[1] || ''
-    let skipadd = false
     plate = plate.toUpperCase().replace(/[^A-Z0-9]+/ig,'')
     let car_id = await query.getCar(plate, team_id)
     let is_admin = await query.isAdmin(requester_id, team_id)
@@ -23,17 +22,14 @@ const handler = async (payload, res) => {
         user: requester_id
     }
 
+    console.log(payload)
+
     if (car_id) {
         msg.text = plate + ' already exists!'
-        bot.postEphemeral(msg)
-        res.status(200).end()
-        return
     } else if (p.length < 2 || p.length > 3) {
         msg.text = 'That\'s not a vaild command. Please use the `/parking add <PLATE>` format!'
-        bot.postEphemeral(msg)
-        res.status(200).end()
-        return
     } else {
+
         if (p.length == 3) {
 
             let re = new RegExp("<@.+\|.+>")
@@ -42,13 +38,13 @@ const handler = async (payload, res) => {
                 slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
                 msg.text = p[2] + ' is not a valid username. Aborting.'
-                bot.postEphermeral(msg)
+                bot.postEphemeral(msg)
                 res.status(200).end()
                 return
             }
 
             if (!is_admin) {
-                response_text = 'You are not allowed to add a plate to another user.'
+                msg.text = 'You are not allowed to add a plate to another user.'
                 bot.postEphemeral(msg)
                 res.status(200).end()
                 return
