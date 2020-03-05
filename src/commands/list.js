@@ -21,7 +21,7 @@ const handler = async (payload, res) => {
 
     if (p.length < 1 || p.length > 2) {
         msg.text = 'That\'s not a vaild command. Please use the `/parking list` format!'
-    } else if (p.length == 2 and !is_admin) {
+    } else if (p.length == 2 && !is_admin) {
         msg.text = 'You do not have permission to view plates attached to someone else\'s account. Using current user instead.\n'
     } else {
         if (p.length == 2) {
