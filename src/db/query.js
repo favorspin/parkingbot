@@ -107,7 +107,7 @@ const isAdmin = async (slack_id, team_id) => {
     let result = await db.query(q,[slack_id, team_id])
 
     if (!_.isEmpty(result.rows)) {
-        return result.rows[0][is_admin]
+        return result.rows[0].is_admin
     } else {
         return false
     }
