@@ -11,6 +11,7 @@ const handler = async (payload, res) => {
     let slack_id = requester_id
     let team_id = payload.team_id
     let response_text = ''
+    let is_admin = await query.isAdmin(requester_id, team_id)
 
     if (p.length < 1 || p.length > 2) {
         response_text = 'That\'s not a vaild command. Please use the `/parking list` format!'
@@ -19,10 +20,15 @@ const handler = async (payload, res) => {
 
             let re = new RegExp("<@.+\|.+>")
 
-            if (re.test(p[1])) {
+            if (re.test(p[1]) && is_admin) {
                 slack_id = p[1].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
                 response_text = p[1] + ' is not a valid username. Using current user instead.\n'
+            }
+
+            if (!is_admin) {
+                'You do not have permission to view plates attached to someone else\'s account. Using current user instaed.'
+                slack_id = requester_id
             }
 
         }

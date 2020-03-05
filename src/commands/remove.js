@@ -12,17 +12,24 @@ const handler = async (payload, res) => {
     let team_id = payload.team_id
     plate = plate.toUpperCase().replace(/[^A-Z0-9]+/ig,'')
     let result = ''
+    let is_admin = await query.isAdmin(requester_id, team_id)
 
     if (p.length != 2) {
         response_text = 'That\'s not a vaild command. Please use the `/parking remove <PLATE>` format!'
     } else {
-        let removed = await query.removeCar(plate, team_id)
-        if (removed) {
-            result = '` has been removed!'
+        my_car = await getUsernameByPlate(plate)
+
+        if (my_car != requester_id && !is_admin) {
+            response_text = 'You are not allowed to remove cars that aren\'t yours.'
         } else {
-            result = '` could not be found!'
+            let removed = await query.removeCar(plate, team_id)
+            if (removed) {
+                result = '` has been removed!'
+            } else {
+                result = '` could not be found!'
+            }
+            response_text = '`' + plate + result
         }
-        response_text = '`' + plate + result
     }
 
     let msg = {

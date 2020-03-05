@@ -11,21 +11,26 @@ const handler = async (payload, res) => {
     let slack_id = requester_id
     let team_id = payload.team_id
     let response_text = ''
+    let is_admin = await query.isAdmin(requester_id, team_id)
 
-    if (p.length != 1) {
-        response_text = 'That\'s not a vaild command. Please use the `/parking listall` format!'
+    if (!is_admin) {
+        response_text = 'You do not have permission to list all plates.'
     } else {
-        let cars = await query.getAllCars(team_id)
-        if (_.isEmpty(cars)) {
-            response_text = response_text + 'There are no cars assigned to any users in this slack account.'
+        if (p.length != 1) {
+            response_text = 'That\'s not a vaild command. Please use the `/parking listall` format!'
         } else {
-            if (cars.length == 1) {
-                response_text = response_text + 'There is 1 car assigned in this slack account:'
+            let cars = await query.getAllCars(team_id)
+            if (_.isEmpty(cars)) {
+                response_text = response_text + 'There are no cars assigned to any users in this slack account.'
             } else {
-                response_text = response_text + 'There are ' + cars.length + ' cars assigned in this slack account:'
-            }
-            for (var i = 0; i < cars.length; i++) {
-                response_text = response_text + '\n <@' + cars[i].slack_id + '> - `' + cars[i].license_plate + '`'
+                if (cars.length == 1) {
+                    response_text = response_text + 'There is 1 car assigned in this slack account:'
+                } else {
+                    response_text = response_text + 'There are ' + cars.length + ' cars assigned in this slack account:'
+                }
+                for (var i = 0; i < cars.length; i++) {
+                    response_text = response_text + '\n <@' + cars[i].slack_id + '> - `' + cars[i].license_plate + '`'
+                }
             }
         }
     }

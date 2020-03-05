@@ -15,6 +15,7 @@ const handler = async (payload, res) => {
     let skipadd = false
     plate = plate.toUpperCase().replace(/[^A-Z0-9]+/ig,'')
     let car_id = await query.getCar(plate, team_id)
+    let is_admin = await query.isAdmin(requester_id, team_id)
 
     if (car_id) {
         response_text = plate + ' already exists!'
@@ -29,6 +30,11 @@ const handler = async (payload, res) => {
                 slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
                 response_text = p[2] + ' is not a valid username. Aborting.'
+                skipadd = true
+            }
+
+            if (!is_admin) {
+                response_text = 'You are not allowed to add a plate to another user.'
                 skipadd = true
             }
         }

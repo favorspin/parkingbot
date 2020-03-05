@@ -16,14 +16,18 @@ const handler = async (payload, res) => {
         response_text = 'That\'s not a vaild command. Please use the `/parking who <PLATE>` format!'
     } else {
 
-        const plate = p[1].toUpperCase().replace(/[^A-Z0-9]+/ig,'')
-
-        slack_id = await query.getUsernameByPlate(plate, team_id)
-
-        if (slack_id == '') {
-            response_text = 'License plate was not found.'
+        if (!is_admin) {
+            response_text = 'You are not allowed to see the owners of cars.'
         } else {
-            response_text = '`' + plate + '` is currently assigned to <@' + slack_id + '>.'
+            const plate = p[1].toUpperCase().replace(/[^A-Z0-9]+/ig,'')
+
+            slack_id = await query.getUsernameByPlate(plate, team_id)
+
+            if (slack_id == '') {
+                response_text = 'License plate was not found.'
+            } else {
+                response_text = '`' + plate + '` is currently assigned to <@' + slack_id + '>.'
+        }
         }
     }
 
