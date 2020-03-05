@@ -21,7 +21,7 @@ const handler = async (payload, res) => {
     }
 
     if (car_id) {
-        msg.text = plate + ' already exists!'
+        msg.text = '`' + plate + '` already exists!'
     } else if (p.length < 2 || p.length > 3) {
         msg.text = 'That\'s not a vaild command. Please use the `/parking add <PLATE>` format!'
     } else if (p.length == 3 && !is_admin) {

@@ -31,22 +31,21 @@ const handler = async (payload, res) => {
                 msg.text = p[1] + ' is not a valid username. Using current user instead.\n'
             }
         }
+    }
 
-        let cars = await query.getAllCarsForUser(slack_id, team_id)
-        if (_.isEmpty(cars)) {
-            msg.text = msg.text + 'There are no cars attached to <@' + slack_id + '>'
+    let cars = await query.getAllCarsForUser(slack_id, team_id)
+    if (_.isEmpty(cars)) {
+        msg.text = msg.text + 'There are no cars attached to <@' + slack_id + '>'
+    } else {
+        if (cars.length == 1) {
+            msg.text = msg.text + 'There is 1 car attached to <@' + slack_id + '>:'
         } else {
-            if (cars.length == 1) {
-                msg.text = msg.text + 'There is 1 car attached to <@' + slack_id + '>:'
-            } else {
-                msg.text = msg.text + 'There are ' + cars.length + ' cars attached to <@' + slack_id + '>:'
-            }
-
-            for (var i = 0; i < cars.length; i++) {
-                msg.text = msg.text + '\n `' + cars[i].license_plate + '`'
-            }
+            msg.text = msg.text + 'There are ' + cars.length + ' cars attached to <@' + slack_id + '>:'
         }
 
+        for (var i = 0; i < cars.length; i++) {
+            msg.text = msg.text + '\n `' + cars[i].license_plate + '`'
+        }
     }
 
     bot.postEphemeral(msg)
