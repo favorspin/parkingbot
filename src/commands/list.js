@@ -25,10 +25,10 @@ const handler = async (payload, res) => {
         msg.text = 'You do not have permission to view plates attached to someone else\'s account. Using current user instead.\n'
     } else {
         if (p.length == 2) {
-            if (re.test(p[2])) {
-                slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
+            if (re.test(p[1])) {
+                slack_id = p[1].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
             } else {
-                msg.text = p[2] + ' is not a valid username. Using current user instead.\n'
+                msg.text = p[1] + ' is not a valid username. Using current user instead.\n'
             }
         }
 
