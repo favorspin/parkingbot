@@ -3,6 +3,15 @@
 const db = require('../db')
 const _ = require('lodash')
 
+const addAdmin = asuync (user_id) => {
+    let q = 'UPDATE api.users \
+             SET is_admin = true \
+             WHERE id = $1'
+    await db.query(q,[user_id])
+
+    return true
+}
+
 const createCar = async (user_id, license_plate, team_id) => {
     let q = 'INSERT INTO api.cars (user_id, license_plate, team_id) \
              VALUES ($1, $2, $3)'
@@ -126,6 +135,7 @@ const removeCar = async (license_plate, team_id) => {
 }
 
 module.exports = {
+    addAdmin: addAdmin,
     createCar: createCar,
     createUser: createUser,
     getAllAdmins: getAllAdmins,

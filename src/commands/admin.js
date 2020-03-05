@@ -12,6 +12,8 @@ const handler = async (payload, res) => {
     let team_id = payload.team_id
     let response_text = ''
     let is_admin = await query.isAdmin(requester_id, team_id)
+    let re = new RegExp("<@.+\|.+>")
+    let skipadd = false
 
     if (p.length < 2 || p.length > 3) {
         response_text = 'That\'s not a vaild command. Please use the `/parking admin [command] (@user)` format!'
@@ -29,7 +31,28 @@ const handler = async (payload, res) => {
                 }
                 break
             case /add/.test(p[1]):
-                console.log('add')
+                if (p.length != 3) {
+                    response_text = 'That\'s not a valid command. Please use the `/parking admin add @user` format!'
+                } else {
+                    if (re.text(p[2])) {
+                        slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
+                    } else {
+                        response_text = p[2] + ' is not a valid username. Aborting.'
+                        skipadd = true
+                    }
+
+                    if (!skipadd) {
+                        let user_id = await query.getUser(slack_id, team_id)
+
+                        if (!user_id) {
+                            user_id = await query.createUser(slack_id, team_id)
+                        }
+
+                        await query.addAdmin(user_id)
+
+                        response_text = 'OK! I added <@' + slack_id + '> as an admin for ParkingBot.'
+                    }
+                }
                 break
             case /(rm|remove|del(ete)?)/.test(p[1]):
                 console.log('remove')
