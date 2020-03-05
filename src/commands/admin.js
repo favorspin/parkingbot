@@ -60,6 +60,12 @@ const handler = async (payload, res) => {
                 } else {
                     if (re.test(p[2])) {
                         slack_id = p[2].match(/@.+\|/).toString().replace(/(@|\|)/g,'')
+
+                        if (slack_id == requester_id) {
+                            response_text = 'You may not remove yourself as an admin.'
+                            skip = true
+                        }
+
                     } else {
                         response_text = p[2] + ' is not a valid username. Aborting.'
                         skip = true
