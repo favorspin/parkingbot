@@ -23,8 +23,8 @@ For produciton, create your environment variables on the server. The following a
 
 Tokens are provided by Slack when you install an app in your workspace. When installing an app on Slack the following slash commands will need to be set:
 
-`/parking` -> \<app_url\>/commands/parkingbot</br>
-`/move` -> \<app_url\>/commands/parkingbot/move
+`/parking` -> /commands/parkingbot</br>
+`/move` -> /commands/parkingbot
 
 Finally the following permissions will need to be assigned to the app under OAuth & Permissions in the Slack App dashboard:
 
@@ -38,18 +38,13 @@ Finally the following permissions will need to be assigned to the app under OAut
     $ npm install
     $ npm start
 
-## Testing
+## API / Testing
 Note: local dev will require you to create a webserver and point Slack slash commands to that URL.
 
-**Upcheck**
+**Commands**</br>
+Slash Commands from Slack send a `POST` message to their assigned route with a payload containing some information regarding the user, workpace, channel and command message sent. An example is provided below. The following routes define 
 
-`[GET] ` -> `/`: You should recieve status 200 and a 👋🌎 message.
-
-**Commands**
-
-`[POST]` -> `/commands/parkingbot`</br>
-`[POST]` -> `/commands/parkingbot/move`: Must include a message payload. The following is a sample of what Slack will send when a slash command is initiated. Note that the "move" route is intended to be a different slash command.
-
+##### Payload
     {
         "token": "78XpJSHMTtLTepVnytIqPZpU",
         "team_id": "T4UG8C282",
@@ -63,6 +58,12 @@ Note: local dev will require you to create a webserver and point Slack slash com
         "response_url": "https://hooks.slack.com/commands/T4UG8C282/951614091927/yvxCzs8WeNa6RuivP34MJZi5",
         "trigger_id": "949752351376.164552410274.bc24f3313985c9181cd8f3b03244d032"
     }
+
+##### Routes
+###### Upcheck
+`[GET] ` -> `/`: You should recieve status 200 and a 👋🌎 message.
+###### Parking Commands
+`[POST]` -> `/commands/parkingbot`: Must include a message payload. The following is a sample of what Slack will send when a slash command is initiated.
 
 ## Commands
 Currently, ParkingBot Supports seven commands. Some (or some variations) are only accessible by defined admins, are are not displayed in help on in-Slack instructions.
